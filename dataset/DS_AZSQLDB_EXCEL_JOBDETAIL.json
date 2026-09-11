@@ -1,0 +1,13 @@
+{
+	"name": "DS_AZSQLDB_EXCEL_JOBDETAIL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AZSQLDB_EXCEL_JOBDETAIL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

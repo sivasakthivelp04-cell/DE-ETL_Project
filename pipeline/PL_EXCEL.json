@@ -1,0 +1,262 @@
+{
+	"name": "PL_EXCEL",
+	"properties": {
+		"activities": [
+			{
+				"name": "CP_EXCEL",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "SP-START-LOG-ENTRY",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": {
+								"value": "@activity('LKUP_EXCEL_JOB_DETAILS').output.firstRow.sourcedata",
+								"type": "Expression"
+							},
+							"wildcardFileName": {
+								"value": "@activity('LKUP_EXCEL_JOB_DETAILS').output.firstRow.SourceFile",
+								"type": "Expression"
+							},
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_EXCEL_SOURCE",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_EXCEL_PARQUET_ADLS",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "LKUP_EXCEL_JOB_DETAILS",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderStoredProcedureName": "[dbo].[vb_get_job_dtls]",
+						"storedProcedureParameters": {
+							"Triggername": {
+								"type": "String",
+								"value": {
+									"value": "@pipeline().parameters.Trigger",
+									"type": "Expression"
+								}
+							}
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "DS_AZSQLDB_EXCEL_JOBDETAIL",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "SP-START-LOG-ENTRY",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "LKUP_EXCEL_JOB_DETAILS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[vb_start_log_entry]",
+					"storedProcedureParameters": {
+						"jobid": {
+							"value": {
+								"value": "@activity('LKUP_EXCEL_JOB_DETAILS').output.firstRow.jobid",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"pipeline_id": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_AZSQLDB_EXCEL_JOBDETAIL",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "SP-SUCESS-LOG-ENTRY",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "CP_EXCEL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[vb_end_log_entry]",
+					"storedProcedureParameters": {
+						"error": {
+							"value": null,
+							"type": "String"
+						},
+						"jobid": {
+							"value": {
+								"value": "@activity('LKUP_EXCEL_JOB_DETAILS').output.firstRow.jobid",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"pipeline_id": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_AZSQLDB_EXCEL_JOBDETAIL",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "SP-FAIL-LOG-ENTRY",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "CP_EXCEL",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[vb_end_log_entry]",
+					"storedProcedureParameters": {
+						"error": {
+							"value": {
+								"value": "@activity('CP_EXCEL').error.message",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"jobid": {
+							"value": {
+								"value": "@activity('LKUP_EXCEL_JOB_DETAILS').output.firstRow.jobid",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"pipeline_id": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_AZSQLDB_EXCEL_JOBDETAIL",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"Trigger": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"Mapping": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-09-10T04:21:37Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,17 @@
+{
+	"name": "LS_AZSQLDB_EXCEL_JOBDETAIL",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "sql-srvr-dev.database.windows.net",
+			"database": "sql-db-dev",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "access-data-dev",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEYxNUZFQkE4LTdCRDctNDlGNi1COTZFLTJCQTA4QUY5MzA4Ml8wMGZlMzI0Yy1jNDUwLTRlMzEtOWU0ZS03MTc0MGQ5YjY2ZmYiDQp9"
+		}
+	}
+}

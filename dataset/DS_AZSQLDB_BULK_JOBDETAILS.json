@@ -1,0 +1,13 @@
+{
+	"name": "DS_AZSQLDB_BULK_JOBDETAILS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DS_AZSQLDB_BULK_JOBDETAILS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

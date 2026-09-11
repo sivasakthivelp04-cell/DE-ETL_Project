@@ -1,0 +1,21 @@
+{
+	"name": "DS_JSON_PARQUET_ADLS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_JSON_PARQUET_ADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "Json",
+				"fileSystem": "input"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
