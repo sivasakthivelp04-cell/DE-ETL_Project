@@ -1,0 +1,15 @@
+{
+	"name": "adf-dev-etl-project-01",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "23de97fa-d94a-4674-83fb-988432204e9f",
+		"tenantId": "33385812-b40e-4231-a3ab-182759af64a3"
+	}
+}
