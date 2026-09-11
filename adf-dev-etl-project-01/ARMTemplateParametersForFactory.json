@@ -1,0 +1,180 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-dev-etl-project-01"
+		},
+		"DS_AZSQLDB_BULK_JOBDETAILS_password": {
+			"value": ""
+		},
+		"DS_AZSQLDB_CSV_JOB_DETAILS_password": {
+			"value": ""
+		},
+		"DS_AZSQL_SRCDB_password": {
+			"value": ""
+		},
+		"DS_BULK_PARQUET_ADLS_accountKey": {
+			"value": ""
+		},
+		"LS_AZSQLDB_CSV_EXCEL_password": {
+			"value": ""
+		},
+		"LS_AZSQLDB_EXCEL_JOBDETAIL_password": {
+			"value": ""
+		},
+		"LS_AZSQL_DB_password": {
+			"value": ""
+		},
+		"LS_BULK_SOURCE_accountKey": {
+			"value": ""
+		},
+		"LS_CSV_PARQUET_ADLS_accountKey": {
+			"value": ""
+		},
+		"LS_CSV_SOURCE_accountKey": {
+			"value": ""
+		},
+		"LS_EXCEL_PARQUET_ADLS_accountKey": {
+			"value": ""
+		},
+		"LS_EXCEL_SOURCE_accountKey": {
+			"value": ""
+		},
+		"LS_JSON_PARQUET_ADLS_accountKey": {
+			"value": ""
+		},
+		"LS_JSON_SOURCE_accountKey": {
+			"value": ""
+		},
+		"LS_RESTAPI_ADLSRAW_accountKey": {
+			"value": ""
+		},
+		"LS_SFTP_CSV_accountKey": {
+			"value": ""
+		},
+		"LS_SFTP_PARQUET_accountKey": {
+			"value": ""
+		},
+		"LS_SNOWFLAKE_password": {
+			"value": ""
+		},
+		"LS_SQL_PARQUET_accountKey": {
+			"value": ""
+		},
+		"LS_SQL_SOURCE_password": {
+			"value": ""
+		},
+		"DS_AZSQLDB_BULK_JOBDETAILS_properties_typeProperties_server": {
+			"value": "sql-srvr-dev.database.windows.net"
+		},
+		"DS_AZSQLDB_BULK_JOBDETAILS_properties_typeProperties_database": {
+			"value": "sql-db-dev"
+		},
+		"DS_AZSQLDB_BULK_JOBDETAILS_properties_typeProperties_userName": {
+			"value": "access-data-dev"
+		},
+		"DS_AZSQLDB_CSV_JOB_DETAILS_properties_typeProperties_server": {
+			"value": "sql-srvr-devv.database.windows.net"
+		},
+		"DS_AZSQLDB_CSV_JOB_DETAILS_properties_typeProperties_database": {
+			"value": "sql-db-dev"
+		},
+		"DS_AZSQLDB_CSV_JOB_DETAILS_properties_typeProperties_userName": {
+			"value": "access-data-dev"
+		},
+		"DS_AZSQL_SRCDB_properties_typeProperties_server": {
+			"value": "sql-srvr-devv.database.windows.net"
+		},
+		"DS_AZSQL_SRCDB_properties_typeProperties_database": {
+			"value": "sql-db-dev"
+		},
+		"DS_AZSQL_SRCDB_properties_typeProperties_userName": {
+			"value": "access-data-dev"
+		},
+		"DS_BULK_PARQUET_ADLS_properties_typeProperties_url": {
+			"value": "https://adlsdevsource0001.dfs.core.windows.net/"
+		},
+		"LS_AZSQLDB_CSV_EXCEL_properties_typeProperties_server": {
+			"value": "sql-srvr-devv.database.windows.net"
+		},
+		"LS_AZSQLDB_CSV_EXCEL_properties_typeProperties_database": {
+			"value": "sql-db-dev"
+		},
+		"LS_AZSQLDB_CSV_EXCEL_properties_typeProperties_userName": {
+			"value": "access-data-dev"
+		},
+		"LS_AZSQLDB_EXCEL_JOBDETAIL_properties_typeProperties_server": {
+			"value": "sql-srvr-devv.database.windows.net"
+		},
+		"LS_AZSQLDB_EXCEL_JOBDETAIL_properties_typeProperties_database": {
+			"value": "sql-db-dev"
+		},
+		"LS_AZSQLDB_EXCEL_JOBDETAIL_properties_typeProperties_userName": {
+			"value": "access-data-dev"
+		},
+		"LS_AZSQL_DB_properties_typeProperties_server": {
+			"value": "sql-srvr-devv.database.windows.net"
+		},
+		"LS_AZSQL_DB_properties_typeProperties_database": {
+			"value": "sql-db-dev"
+		},
+		"LS_AZSQL_DB_properties_typeProperties_userName": {
+			"value": "access-data-dev"
+		},
+		"LS_BULK_SOURCE_properties_typeProperties_url": {
+			"value": "https://adlsdevraw0001.dfs.core.windows.net/"
+		},
+		"LS_CSV_PARQUET_ADLS_properties_typeProperties_url": {
+			"value": "https://adlsdevsource00001.dfs.core.windows.net/"
+		},
+		"LS_CSV_SOURCE_properties_typeProperties_url": {
+			"value": "https://adlsdevraw00001.dfs.core.windows.net/"
+		},
+		"LS_EXCEL_PARQUET_ADLS_properties_typeProperties_url": {
+			"value": "https://adlsdevsource00001.dfs.core.windows.net/"
+		},
+		"LS_EXCEL_SOURCE_properties_typeProperties_url": {
+			"value": "https://adlsdevraw00001.dfs.core.windows.net/"
+		},
+		"LS_JSON_PARQUET_ADLS_properties_typeProperties_url": {
+			"value": "https://adlsdevsource0001.dfs.core.windows.net/"
+		},
+		"LS_JSON_SOURCE_properties_typeProperties_url": {
+			"value": "https://adlsdevraw0001.dfs.core.windows.net/"
+		},
+		"LS_RESTAPI_ADLSRAW_properties_typeProperties_url": {
+			"value": "https://adlsdevraw0001.dfs.core.windows.net/"
+		},
+		"LS_RESTAPI_CSV_properties_typeProperties_url": {
+			"value": "https://retoolapi.dev/hGkBQv/data"
+		},
+		"LS_SFTP_CSV_properties_typeProperties_url": {
+			"value": "https://adlsdevraw0001.dfs.core.windows.net/"
+		},
+		"LS_SFTP_PARQUET_properties_typeProperties_url": {
+			"value": "https://adlsdevsource0001.dfs.core.windows.net/"
+		},
+		"LS_SNOWFLAKE_properties_typeProperties_database": {
+			"value": "DBAZURESNOW"
+		},
+		"LS_SNOWFLAKE_BLOBRAW_sasUri": {
+			"value": ""
+		},
+		"LS_SQL_PARQUET_properties_typeProperties_url": {
+			"value": "https://adlsdevsource0001.dfs.core.windows.net/"
+		},
+		"LS_SQL_SOURCE_properties_typeProperties_server": {
+			"value": "SIVA-DESKTOP\\SQLEXPRESS"
+		},
+		"LS_SQL_SOURCE_properties_typeProperties_database": {
+			"value": "ETL_Dev_Project"
+		},
+		"LS_SQL_SOURCE_properties_typeProperties_userName": {
+			"value": "Sa"
+		},
+		"Tr_sample_csv_properties_PL1_MASTER_parameters_Trigger": {
+			"value": "Tr_sample_csv"
+		}
+	}
+}
